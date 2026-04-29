@@ -5,6 +5,10 @@ Acesse: https://vithorrosa.github.io/mentorbox/
 
 MentorBox é uma aplicação web simples para organizar tarefas, metas e receber orientações simuladas de um mentor digital.
 
+## Versão
+
+v1.0.0 — MVP funcional com tarefas, metas, mentor simulado, persistência local e testes manuais documentados.
+
 ## Objetivo
 
 Este projeto foi criado para praticar fundamentos de front-end com HTML, CSS e JavaScript puro, incluindo manipulação de DOM, eventos, estado da aplicação e persistência com localStorage.
