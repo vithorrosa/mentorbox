@@ -17,7 +17,7 @@ Este projeto foi criado para praticar fundamentos de front-end com HTML, CSS e J
 - Criar metas
 - Excluir metas
 - Ver resumo no dashboard
-- Conversar com um mentor simulado
+- Conversar com um mentor simulado 
 - Persistir dados no navegador com localStorage
 - Limpar histórico do mentor
 
@@ -44,7 +44,8 @@ mentorbox/
 │   └── main.js
 └── assets/
     └── .gitkeep
-````
+
+```
 
 ## Aprendizados
 

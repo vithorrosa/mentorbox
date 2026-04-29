@@ -4,9 +4,10 @@ const taskForm = document.querySelector("#taskForm");
 const taskInput = document.querySelector("#taskInput");
 const taskList = document.querySelector("#taskList");
 const taskSummary = document.querySelector("#taskSummary");
+const filterButtons = document.querySelectorAll(".filter-button");
 
 let tasks = loadData("mentorbox:tasks") || [];
-
+let currentFilter = "all";
 function saveTasks() {
   saveData("mentorbox:tasks", tasks);
 }
@@ -23,11 +24,24 @@ function updateTaskSummary() {
 
   taskSummary.textContent = `Você tem ${totalTasks} tarefa(s): ${completedTasks} concluída(s) e ${pendingTasks} pendente(s).`;
 }
-
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+    renderTasks();
+  });
+});
 function renderTasks() {
   taskList.innerHTML = "";
+  let filteredTasks = tasks;
 
-  tasks.forEach((task) => {
+  if (currentFilter === "pending") {
+    filteredTasks = tasks.filter((task) => !task.completed);
+  }
+
+  if (currentFilter === "completed") {
+    filteredTasks = tasks.filter((task) => task.completed);
+  }
+  filteredTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = "list-item";
 
@@ -36,8 +50,8 @@ function renderTasks() {
     checkbox.checked = task.completed;
 
     const span = document.createElement("span");
-span.className = "list-item__text";
-span.textContent = task.title;
+    span.className = "list-item__text";
+    span.textContent = task.title;
 
     if (task.completed) {
       span.style.textDecoration = "line-through";
@@ -46,8 +60,8 @@ span.textContent = task.title;
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Excluir";
-deleteButton.type = "button";
-deleteButton.className = "button button--danger";
+    deleteButton.type = "button";
+    deleteButton.className = "button button--danger";
     checkbox.addEventListener("change", () => {
       toggleTask(task.id);
     });
