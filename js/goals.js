@@ -6,7 +6,7 @@ const goalList = document.querySelector("#goalList");
 const goalSummary = document.querySelector("#goalSummary");
 const goalTargetInput = document.querySelector("#goalTargetInput");
 
-let goals = loadData("mentorbox:goals") || [];
+let goals = loadData("mentorbox:goals", []);
 
 function saveGoals() {
   saveData("mentorbox:goals", goals);
@@ -23,8 +23,27 @@ function updateGoalSummary() {
   goalSummary.textContent = `Você tem ${totalGoals} meta(s) cadastrada(s).`;
 }
 
+function calculateGoalProgress(goal) {
+  if (!goal.target || goal.target <= 0) {
+    return 0;
+  }
+
+  return Math.round((goal.current / goal.target) * 100);
+}
+
+function normalizeGoal(goal) {
+  return {
+    id: goal.id,
+    title: goal.title,
+    current: goal.current || 0,
+    target: goal.target || 1,
+  };
+}
+
 function renderGoals() {
   goalList.innerHTML = "";
+
+  goals = goals.map(normalizeGoal);
 
   goals.forEach((goal) => {
     const li = document.createElement("li");
@@ -33,9 +52,10 @@ function renderGoals() {
     const span = document.createElement("span");
     span.className = "list-item__text";
 
-    const progress = Math.round((goal.current / goal.target) * 100);
+    const progress = calculateGoalProgress(goal);
 
     span.textContent = `${goal.title} — ${goal.current}/${goal.target} (${progress}%)`;
+
     const progressButton = document.createElement("button");
     progressButton.textContent = "+1";
     progressButton.type = "button";
@@ -44,6 +64,7 @@ function renderGoals() {
     progressButton.addEventListener("click", () => {
       incrementGoal(goal.id);
     });
+
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Excluir";
     deleteButton.type = "button";
@@ -60,6 +81,7 @@ function renderGoals() {
     goalList.appendChild(li);
   });
 
+  saveGoals();
   updateGoalSummary();
 }
 
@@ -75,6 +97,7 @@ function addGoal(title, target) {
   saveGoals();
   renderGoals();
 }
+
 function incrementGoal(goalId) {
   goals = goals.map((goal) => {
     if (goal.id === goalId) {
@@ -92,6 +115,7 @@ function incrementGoal(goalId) {
   saveGoals();
   renderGoals();
 }
+
 function deleteGoal(goalId) {
   goals = goals.filter((goal) => goal.id !== goalId);
 
