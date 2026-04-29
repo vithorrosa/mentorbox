@@ -6,8 +6,9 @@ const taskList = document.querySelector("#taskList");
 const taskSummary = document.querySelector("#taskSummary");
 const filterButtons = document.querySelectorAll(".filter-button");
 
-let tasks = loadData("mentorbox:tasks") || [];
+let tasks = loadData("mentorbox:tasks", []);
 let currentFilter = "all";
+
 function saveTasks() {
   saveData("mentorbox:tasks", tasks);
 }
@@ -24,23 +25,24 @@ function updateTaskSummary() {
 
   taskSummary.textContent = `Você tem ${totalTasks} tarefa(s): ${completedTasks} concluída(s) e ${pendingTasks} pendente(s).`;
 }
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    currentFilter = button.dataset.filter;
-    renderTasks();
-  });
-});
-function renderTasks() {
-  taskList.innerHTML = "";
-  let filteredTasks = tasks;
 
+function getFilteredTasks() {
   if (currentFilter === "pending") {
-    filteredTasks = tasks.filter((task) => !task.completed);
+    return tasks.filter((task) => !task.completed);
   }
 
   if (currentFilter === "completed") {
-    filteredTasks = tasks.filter((task) => task.completed);
+    return tasks.filter((task) => task.completed);
   }
+
+  return tasks;
+}
+
+function renderTasks() {
+  taskList.innerHTML = "";
+
+  const filteredTasks = getFilteredTasks();
+
   filteredTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = "list-item";
@@ -62,6 +64,7 @@ function renderTasks() {
     deleteButton.textContent = "Excluir";
     deleteButton.type = "button";
     deleteButton.className = "button button--danger";
+
     checkbox.addEventListener("change", () => {
       toggleTask(task.id);
     });
@@ -114,6 +117,13 @@ function deleteTask(taskId) {
   saveTasks();
   renderTasks();
 }
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+    renderTasks();
+  });
+});
 
 taskForm.addEventListener("submit", (event) => {
   event.preventDefault();

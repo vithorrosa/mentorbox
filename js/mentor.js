@@ -5,10 +5,18 @@ const mentorInput = document.querySelector("#mentorInput");
 const mentorMessages = document.querySelector("#mentorMessages");
 const clearMentorButton = document.querySelector("#clearMentorButton");
 
-let mentorHistory = loadData("mentorbox:mentorHistory") || [];
+let mentorHistory = loadData("mentorbox:mentorHistory", []);
 
 function saveMentorHistory() {
   saveData("mentorbox:mentorHistory", mentorHistory);
+}
+
+function createMentorMessage(author, text) {
+  return {
+    id: Date.now() + Math.random(),
+    author: author,
+    text: text,
+  };
 }
 
 function getMentorResponse(userMessage) {
@@ -30,7 +38,11 @@ function getMentorResponse(userMessage) {
     return "Liste tudo que está pendente. Depois escolha só 3 prioridades para hoje. O resto é ruído.";
   }
 
-  if (message.includes("dinheiro") || message.includes("finança") || message.includes("financas")) {
+  if (
+    message.includes("dinheiro") ||
+    message.includes("finança") ||
+    message.includes("financas")
+  ) {
     return "Antes de cortar gastos, anote tudo que entra e sai. Sem medir, você só está chutando.";
   }
 
@@ -41,38 +53,46 @@ function getMentorResponse(userMessage) {
   return "Boa pergunta. Comece quebrando isso em uma ação pequena que você consegue executar hoje.";
 }
 
+function renderEmptyMentorMessage() {
+  const emptyMessage = document.createElement("p");
+  emptyMessage.textContent =
+    "Faça uma pergunta sobre estudos, tarefas, metas ou organização.";
+
+  mentorMessages.appendChild(emptyMessage);
+}
+
 function renderMentorMessages() {
   mentorMessages.innerHTML = "";
 
   if (mentorHistory.length === 0) {
-    const emptyMessage = document.createElement("p");
-    emptyMessage.textContent = "Faça uma pergunta sobre estudos, tarefas, metas ou organização.";
-    mentorMessages.appendChild(emptyMessage);
+    renderEmptyMentorMessage();
     return;
   }
 
- mentorHistory.forEach((message) => {
-  const p = document.createElement("p");
-  p.className = message.author === "user" ? "message message--user" : "message message--mentor";
+  mentorHistory.forEach((message) => {
+    const p = document.createElement("p");
 
-  if (message.author === "user") {
-    p.textContent = `Você: ${message.text}`;
-  } else {
-    p.textContent = `Mentor: ${message.text}`;
-  }
+    p.className =
+      message.author === "user"
+        ? "message message--user"
+        : "message message--mentor";
 
-  mentorMessages.appendChild(p);
-});
+    if (message.author === "user") {
+      p.textContent = `Você: ${message.text}`;
+    } else {
+      p.textContent = `Mentor: ${message.text}`;
+    }
+
+    mentorMessages.appendChild(p);
+  });
 }
 
-function addMentorMessage(author, text) {
-  const newMessage = {
-    id: Date.now(),
-    author: author,
-    text: text,
-  };
+function addMentorExchange(userMessage) {
+  const mentorResponse = getMentorResponse(userMessage);
 
-  mentorHistory.push(newMessage);
+  mentorHistory.push(createMentorMessage("user", userMessage));
+  mentorHistory.push(createMentorMessage("mentor", mentorResponse));
+
   saveMentorHistory();
   renderMentorMessages();
 }
@@ -86,10 +106,7 @@ mentorForm.addEventListener("submit", (event) => {
     return;
   }
 
-  addMentorMessage("user", userMessage);
-
-  const mentorResponse = getMentorResponse(userMessage);
-  addMentorMessage("mentor", mentorResponse);
+  addMentorExchange(userMessage);
 
   mentorInput.value = "";
   mentorInput.focus();
