@@ -20,6 +20,7 @@ Este projeto foi criado para praticar fundamentos de front-end com HTML, CSS e J
 - Conversar com um mentor simulado 
 - Persistir dados no navegador com localStorage
 - Limpar histórico do mentor
+- - Acompanhar progresso das metas com atual/alvo e porcentagem
 
 ## Tecnologias usadas
 
