@@ -1,4 +1,7 @@
 # MentorBox
+## Projeto online
+
+Acesse: https://vithorrosa.github.io/mentorbox/
 
 MentorBox é uma aplicação web simples para organizar tarefas, metas e receber orientações simuladas de um mentor digital.
 
