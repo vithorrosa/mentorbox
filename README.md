@@ -78,3 +78,10 @@ Durante o desenvolvimento deste projeto, pratiquei:
 - Interface responsiva com layout em cards
 - Dashboard visual para tarefas e metas
 - Link para o repositório no GitHub
+
+
+## Qualidade e testes
+
+O projeto possui um plano de testes manuais documentado em [`TESTES.md`](./TESTES.md).
+
+Os testes cobrem tarefas, metas, mentor simulado, persistência com localStorage e responsividade básica.
