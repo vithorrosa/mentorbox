@@ -32,16 +32,16 @@ filterButtons.forEach((button) => {
 });
 function renderTasks() {
   taskList.innerHTML = "";
-let filteredTasks = tasks;
+  let filteredTasks = tasks;
 
-if (currentFilter === "pending") {
-  filteredTasks = tasks.filter((task) => !task.completed);
-}
+  if (currentFilter === "pending") {
+    filteredTasks = tasks.filter((task) => !task.completed);
+  }
 
-if (currentFilter === "completed") {
-  filteredTasks = tasks.filter((task) => task.completed);
-}
- filteredTasks.forEach((task) => {
+  if (currentFilter === "completed") {
+    filteredTasks = tasks.filter((task) => task.completed);
+  }
+  filteredTasks.forEach((task) => {
     const li = document.createElement("li");
     li.className = "list-item";
 
@@ -50,8 +50,8 @@ if (currentFilter === "completed") {
     checkbox.checked = task.completed;
 
     const span = document.createElement("span");
-span.className = "list-item__text";
-span.textContent = task.title;
+    span.className = "list-item__text";
+    span.textContent = task.title;
 
     if (task.completed) {
       span.style.textDecoration = "line-through";
@@ -60,8 +60,8 @@ span.textContent = task.title;
 
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Excluir";
-deleteButton.type = "button";
-deleteButton.className = "button button--danger";
+    deleteButton.type = "button";
+    deleteButton.className = "button button--danger";
     checkbox.addEventListener("change", () => {
       toggleTask(task.id);
     });

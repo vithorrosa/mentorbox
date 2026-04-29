@@ -30,7 +30,7 @@ Este projeto foi criado para praticar fundamentos de front-end com HTML, CSS e J
 
 ## Estrutura de pastas
 
-```text
+````text
 mentorbox/
 ├── index.html
 ├── README.md
