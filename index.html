@@ -11,17 +11,33 @@
 </head>
 
 <body>
-    <header>
-        <h1>MentorBox</h1>
-        <p>Organize seus estudos, tarefas e metas em um só lugar.</p>
-    </header>
+    <header class="app-header">
+  <div>
+    <h1>MentorBox</h1>
+    <p>Organize tarefas, acompanhe metas e receba orientações práticas.</p>
+  </div>
+
+  <a class="header-link" href="https://github.com/vithorrosa/mentorbox" target="_blank" rel="noopener">
+    Ver no GitHub
+  </a>
+</header>
 
     <main>
-        <section>
-            <h2>Dashboard</h2>
-            <p id="taskSummary">Nenhuma tarefa cadastrada ainda.</p>
-            <p id="goalSummary">Nenhuma meta cadastrada ainda.</p>
-        </section>
+       <section>
+  <h2>Dashboard</h2>
+
+  <div class="dashboard-grid">
+    <article class="dashboard-card">
+      <span>Tarefas</span>
+      <p id="taskSummary">Nenhuma tarefa cadastrada ainda.</p>
+    </article>
+
+    <article class="dashboard-card">
+      <span>Metas</span>
+      <p id="goalSummary">Nenhuma meta cadastrada ainda.</p>
+    </article>
+  </div>
+</section>
 
         <section>
             <h2>Tarefas</h2>
