@@ -1,0 +1,1 @@
+console.log("MentorBox iniciado com sucesso.");
