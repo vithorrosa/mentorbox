@@ -33,19 +33,6 @@
 
                 <button type="submit">Adicionar</button>
             </form>
-            <div class="task-filters" aria-label="Filtros de tarefas">
-  <button type="button" class="button filter-button" data-filter="all">
-    Todas
-  </button>
-
-  <button type="button" class="button filter-button" data-filter="pending">
-    Pendentes
-  </button>
-
-  <button type="button" class="button filter-button" data-filter="completed">
-    Concluídas
-  </button>
-</div>
 
             <ul id="taskList"></ul>
         </section>
@@ -53,12 +40,34 @@
         <section>
             <h2>Metas</h2>
 
-            <form id="goalForm">
-                <label for="goalInput">Nova meta</label>
+            <section>
+  <h2>Metas</h2>
 
-                <input type="text" id="goalInput" placeholder="Ex.: Estudar JavaScript por 30 dias" required />
+  <form id="goalForm">
+    <label for="goalInput">Nova meta</label>
 
-                <button type="submit">Adicionar meta</button>
+    <input
+      type="text"
+      id="goalInput"
+      placeholder="Ex.: Estudar JavaScript"
+      required
+    />
+
+    <label for="goalTargetInput">Alvo da meta</label>
+
+    <input
+      type="number"
+      id="goalTargetInput"
+      placeholder="Ex.: 30"
+      min="1"
+      required
+    />
+
+    <button type="submit">Adicionar meta</button>
+  </form>
+
+  <ul id="goalList"></ul>
+</section>
             </form>
 
             <ul id="goalList"></ul>
