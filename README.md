@@ -44,3 +44,28 @@ mentorbox/
 │   └── main.js
 └── assets/
     └── .gitkeep
+
+
+## Aprendizados
+
+Durante o desenvolvimento deste projeto, pratiquei:
+
+- Estruturação de uma aplicação web com HTML, CSS e JavaScript puro
+- Manipulação do DOM com `querySelector`, `createElement` e `appendChild`
+- Eventos de formulário com `addEventListener`
+- Prevenção do comportamento padrão com `event.preventDefault()`
+- Criação, atualização e exclusão de dados em arrays
+- Persistência de dados no navegador usando `localStorage`
+- Serialização e desserialização com `JSON.stringify()` e `JSON.parse()`
+- Organização de código em arquivos separados por responsabilidade
+- Uso de Git para versionamento
+- Publicação do projeto com GitHub Pages
+
+## Próximas melhorias
+
+- Melhorar o design responsivo para celulares
+- Adicionar filtros para tarefas pendentes e concluídas
+- Criar progresso percentual para metas
+- Adicionar tema claro/escuro
+- Melhorar o mentor simulado com mais categorias de respostas
+- Refatorar o código para reduzir duplicação
