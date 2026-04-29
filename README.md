@@ -71,3 +71,10 @@ Durante o desenvolvimento deste projeto, pratiquei:
 - Adicionar tema claro/escuro
 - Melhorar o mentor simulado com mais categorias de respostas
 - Refatorar o código para reduzir duplicação
+
+
+## Parte visual 
+
+- Interface responsiva com layout em cards
+- Dashboard visual para tarefas e metas
+- Link para o repositório no GitHub
